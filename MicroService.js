@@ -37,8 +37,8 @@ function CreateAction(ActionDescr, Settings) {
     const actionArguments = ActionDescr;
     const actionFunction = ActionDescr.pop();
 
-    async function BuildArguments(input, context) {
-        return asyncMap(actionArguments, async (argName) => await ProcessArg(argName, input, context));
+    async function BuildArguments(context) {
+        return asyncMap(actionArguments, async (argName) => await ProcessArg(argName, context.input, context));
     }
 
     async function ProcessArg(argName, input, context) {
@@ -61,9 +61,10 @@ function CreateAction(ActionDescr, Settings) {
         return context.params[argName]
     }
     
+
     async function execute(context) {
         // Se procesan uno a uno los argumentos
-        const localArguments = await BuildArguments(context.input);
+        const localArguments = await BuildArguments(context);
         return actionFunction.apply(context, localArguments);
     };
 

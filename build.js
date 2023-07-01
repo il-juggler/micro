@@ -63,13 +63,12 @@ ${paramsParam.join(',\n')}
 
 export default {actions, params}
             `;
-        fs.writeFileSync( path.join(`microservice.${microservice.name}.def.js`), str);
+        
+        fs.writeFileSync( path.join(`micro.df.${microservice.name}.js`), str);
     }
 }
 
 Build();
-
-
 
 
 function getArguments(functionString) {
