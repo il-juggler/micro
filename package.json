@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/il-juggler/micro/issues"
   },
-  "homepage": "https://github.com/il-juggler/micro#readme"
+  "bin" : {
+    "micro-build" : "node build.js"
+  },
+  "homepage": "https://github.com/il-juggler/micro#readme",
+  "type": "module"
 }

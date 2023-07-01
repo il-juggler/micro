@@ -3,7 +3,7 @@ import fs from 'fs';
 import path from 'path'
 
 async function Build() {
-    const conf = await import(path.join(process.cwd(), 'microservice.conf.js') );
+    const conf = await import(path.join(process.cwd(), 'micro.conf.js') );
 
     for(const microservice of conf.default.microservices) {
         const folderPath = path.join(process.cwd(), microservice.actionsPath);
@@ -22,7 +22,7 @@ async function Build() {
         
             if (fileStats.isFile() && path.extname(file) === '.js') {
                 const fileName = path.basename(file, '.js');
-                paramsImport.push(`import param_${fileName} from './params/${file}'`);
+                paramsImport.push(`import param_${fileName} from './${microservice.paramsPath}/${file}'`);
                 paramsParam.push(`    ${fileName}: param_${fileName} `)
             }
         }
@@ -34,7 +34,7 @@ async function Build() {
         
             if (fileStats.isFile() && path.extname(file) === '.js') {
                 const fileName = path.basename(file, '.js');
-                actionsImport.push(`import action_${fileName} from './actions/${file}'`)
+                actionsImport.push(`import action_${fileName} from './${microservice.actionsPath}/${file}'`)
                 const f = await import(`${filePath}`);
                 const args = getArguments(f.default.toString()).map(arg => `"${arg}"`);
                 args.push('action_' + fileName);
@@ -62,9 +62,7 @@ ${paramsParam.join(',\n')}
 };
 
 export default {actions, params}
-        
             `;
-
         fs.writeFileSync( path.join(`microservice.${microservice.name}.def.js`), str);
     }
 }
