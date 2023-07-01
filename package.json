@@ -1,0 +1,19 @@
+{
+  "name": "micro",
+  "version": "1.0.0",
+  "description": "Microservices helper",
+  "main": "index.js",
+  "scripts": {
+    "test": "test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/il-juggler/micro.git"
+  },
+  "author": "Alonsoul",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/il-juggler/micro/issues"
+  },
+  "homepage": "https://github.com/il-juggler/micro#readme"
+}
